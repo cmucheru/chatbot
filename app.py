@@ -1,11 +1,11 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
 import spacy
 from spacy.matcher import Matcher
 from spacy.cli import download
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"], "headers": ["Content-Type"]}})
+CORS(app)
 
 # Ensure the spaCy model is downloaded
 try:
@@ -48,11 +48,17 @@ def chatbot_response():
     message = data['message']
     doc = nlp(message)
     response = generate_response(doc)
-    return jsonify({'message': response})
+    resp = jsonify({'message': response})
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    return resp
 
 @app.route('/api/chatbot', methods=['OPTIONS'])
 def options():
-    return '', 204
+    resp = make_response('', 204)
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
+    resp.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+    return resp
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
