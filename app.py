@@ -55,7 +55,6 @@ def chatbot_response():
 @app.route('/api/chatbot', methods=['OPTIONS'])
 def options():
     resp = make_response('', 204)
-    resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Methods'] = 'POST, OPTIONS'
     resp.headers['Access-Control-Allow-Headers'] = 'Content-Type'
     return resp
