@@ -5,7 +5,7 @@ from spacy.matcher import Matcher
 from spacy.cli import download
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
+CORS(app, resources={r"/*": {"origins": "*", "methods": ["GET", "POST", "OPTIONS"], "headers": ["Content-Type"]}})
 
 # Ensure the spaCy model is downloaded
 try:
