@@ -1,2 +1,3 @@
 # it_chatbot
-A conversational chatbot for embedding in web and mobile apps
+A conversational chatbot for embedding in Ionpac Technolgoies website.
+
