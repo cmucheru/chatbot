@@ -5,7 +5,7 @@ from spacy.matcher import Matcher
 from spacy.cli import download
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Ensure the spaCy model is downloaded
 try:
@@ -31,7 +31,7 @@ for pattern in greeting_patterns:
     matcher.add("GREETING", [pattern])
 
 for pattern in inquiry_patterns:
-    matcher.add("INQUIRY",[pattern])
+    matcher.add("INQUIRY", [pattern])
 
 def generate_response(doc):
     matches = matcher(doc)
