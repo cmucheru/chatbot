@@ -50,5 +50,9 @@ def chatbot_response():
     response = generate_response(doc)
     return jsonify({'message': response})
 
+@app.route('/api/chatbot', methods=['OPTIONS'])
+def options():
+    return '', 204
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
